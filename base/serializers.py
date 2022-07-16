@@ -17,6 +17,9 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = '__all__'
 
+    def create(self, validated_data):
+        return Category.objects.create(user=self.context['user'], **validated_data)
+
 class UserRegisterSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     username = serializers.CharField(max_length=100)
